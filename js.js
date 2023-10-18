@@ -4,7 +4,7 @@ $(document).ready(function(){
     url:"json/自傳.json",
     success:function(result){
       for(let i=0;i<result.length;i++){
-        the_history.innerHTML+="<div class='The_history'></div><div class='theme' id='"+result[i]['id']+"'><h6 class='theme_title'>"+result[i]['主題']+"</h6><img class='about_img scent' src='"+result[i]['圖片']+"'</img><div class='family_text'>"+result[i]['內容']+"</div></div></div>";
+        the_history.innerHTML+="<div class='The_history'></div><div class='theme' id='"+result[i]['id']+"'><h4 class='theme_title'>"+result[i]['主題']+"</h4><img class='about_img scent' src='"+result[i]['圖片']+"'</img><div class='family_text'>"+result[i]['內容']+"</div></div></div>";
       }
     }  
   });
@@ -15,10 +15,10 @@ $(document).ready(function(){
     url:"json/教學.json",
     success:function(result){
       for(let i=0;i<result.length;i++){
-      The_class.innerHTML+="<div class='carousel-item'><div class='row'><div class='col-md-6 col-xs-12'><div class='class_lt'><div class='Activity_title_1'>"+
+      The_class.innerHTML+="<div class='carousel-item'><div class='class_card'><div class='row'><div class='col-md-6 col-xs-12'><div class='class_lt'><div class='class_title'>"+
       result[i]['名稱']+"</div><div class='class_information'>"+
-      result[i]['資訊']+"<br>"+result[i]['老師']+"<br>"+result[i]['分數']+"</div><div class='class_text'>"+result[i]['心得']+ "</div></div></div><div class='col-md-6 col-xs-12'><div class='Activity_rt'><img class='class_img' src="+
-      result[i]['圖片']+"></img></div></div></div></div>"
+      result[i]['資訊']+"<br>"+result[i]['老師']+"<br>"+result[i]['分數']+"</div><div class='class_text'>"+result[i]['心得']+ "</div></div></div><div class='col-md-6 col-xs-12'><div class='sop_rt'><img class='scroll_img' src='"+
+      result[i]['圖片']+"'></img></div></div></div></div>"
       }
     }
   });
@@ -63,24 +63,39 @@ $(document).ready(function(){
       }
     }
   });
+
+    // 網頁作品
+  let The_web=document.querySelector(".The_web");
+  $.ajax({
+    url:"json/網頁.json",
+    success:function(result){
+      for(let i=0;i<result.length;i++){
+        The_web.innerHTML+="<hr><div class='web_content'><div class='Societie'><div class='row'><div class='col-md-6 col-xs-12'><div class='Societie_lt'><h6 class='text_middle'>"+
+        result[i]['主題']+"</h6><p>"+
+        result[i]['內容']+"</p><a href='"+
+        result[i]['link']+"'>前往網頁</a></div></div><div class='col-md-6 col-xs-12'><div class='Societie_rt'><img class='scroll_img' src='"+
+        result[i]['圖片']+"'></img></div></div></div></div></div>"
+      }
+    }
+  });
+  
  
   let container_Certifications=document.querySelector(".container_Certifications");
   $.ajax({
     url:"json/證照.json",
     success:function(result){
       for(let i=0;i<result.length;i++){
-        if(result[i]['Certifications'] === null){
-          result[i]['Certifications'] = "";
-        }
-        if(result[i]['SCert_img'] === null){
-          result[i]['SCert_img'] = "";
-        }
+        // if(result[i]['Certifications'] === null){
+        //   result[i]['Certifications'] = "";
+        // }
+        // if(result[i]['SCert_img'] === null){
+        //   result[i]['SCert_img'] = "";
+        // }
       container_Certifications.innerHTML+="<div class='Cert'><div class='Cert_text'>證照名稱："+
       result[i]['name']+"</div><div class='Cert_text'>單位:"+
       result[i]['wh']+"</div><div class='Cert_text'>考證日期："+
       result[i]['date']+"</div><img class='Cert_img' src="+
-      result[i]['Certifications']+"><img class='SCert_img' src="+
-      result[i]['SCert_img']+"></div>"
+      result[i]['Cert_img']+"></div>"
       }
     }
   });
@@ -122,14 +137,14 @@ $(document).ready(function(){
   }
   // 讀書計畫區塊1
   $(".open_all_1").on("click",function(){
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < 4; i++) {
       let The_time = document.getElementsByClassName("The_time");
       $(The_time[i]).slideToggle(200);
     }
   });
     // 讀書計畫區塊2
   $(".open_all_2").on("click",function(){
-    for (i = 3; i < 8; i++) {
+    for (i = 4; i < 8; i++) {
       let The_time = document.getElementsByClassName("The_time");
       $(The_time[i]).slideToggle(200);
     }
